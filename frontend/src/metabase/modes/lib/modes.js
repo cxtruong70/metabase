@@ -5,6 +5,7 @@ import GeoMode from "../components/modes/GeoMode";
 import PivotMode from "../components/modes/PivotMode";
 import NativeMode from "../components/modes/NativeMode";
 import DefaultMode from "../components/modes/DefaultMode";
+import ActionMode from "../components/modes/ActionMode";
 
 import StructuredQuery from "metabase-lib/lib/queries/StructuredQuery";
 import NativeQuery from "metabase-lib/lib/queries/NativeQuery";
@@ -12,6 +13,10 @@ import NativeQuery from "metabase-lib/lib/queries/NativeQuery";
 export function getMode(question) {
   if (!question) {
     return null;
+  }
+
+  if (question.card().display === "action-button") {
+    return ActionMode;
   }
 
   const query = question.query();
